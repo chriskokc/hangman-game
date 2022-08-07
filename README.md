@@ -9,6 +9,10 @@
 ### Flowchart
 
     
+### Flowchart
+  ![Hangman game flowchart drawio](https://user-images.githubusercontent.com/87203804/183292169-83aa2b2f-5642-498d-824e-b217430708d0.png)
+
+    
 ### Classes
   - Game Logic
     - Variables
