@@ -4,13 +4,12 @@ public class GameLogic {
     // variables
     private int userLife;
     private ArrayList<String> words = new ArrayList<>();
+    private String pickedWord;
 
     // constructors
     public GameLogic() {
-        this.userLife = 0;
-        this.words.add("motivation");
-        this.words.add("Java");
-        this.words.add("Coding");
+        this.setUserLife(0);
+        this.generateWords();
     }
 
     // setters
@@ -18,10 +17,27 @@ public class GameLogic {
         this.userLife = userLife;
     }
 
-    // methods
-
-    public static void main(String[] args) {
-        GameLogic hangman = new GameLogic();
-        System.out.println(hangman.words);
+    public void generateWords() {
+        this.words.add("Motivation");
+        this.words.add("Java");
+        this.words.add("Coding");
+        this.words.add("Programming");
+        this.words.add("Fun");
+        this.words.add("Foodie");
+        this.words.add("Computer");
+        this.words.add("Air");
+        this.words.add("Housekeeper");
+        this.words.add("Bee");
     }
+
+    // methods
+    public void pickRandomWord() {
+        int index = (int) (Math.random() * this.words.size());
+        this.pickedWord = words.get(index);
+    }
+
+    public boolean isInWord(String userInputLetter) {
+        return this.pickedWord.toLowerCase().contains(userInputLetter.toLowerCase());
+    }
+
 }
