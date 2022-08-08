@@ -52,7 +52,7 @@ public class GameLogic {
     }
 
     public boolean isInWord(String userInputLetter) {
-        return this.pickedWord.toLowerCase().contains(userInputLetter.toLowerCase());
+        return this.getPickedWord().toLowerCase().contains(userInputLetter.toLowerCase());
     }
 
 

@@ -7,15 +7,28 @@ public class Display {
 
     private static final Scanner scannerObj = new Scanner(System.in);
     private String hiddenWord = "";
+    private String guessLetter;
 
     // setters
     public void setHiddenWord(String hiddenWord) {
-        this.hiddenWord += hiddenWord;
+        this.hiddenWord = hiddenWord;
+    }
+
+    public void generateUnderscores() {
+        this.hiddenWord += "_";
+    }
+
+    public void setGuessLetter(String guessLetter) {
+        this.guessLetter = guessLetter;
     }
 
     // getters
     public String getHiddenWord() {
         return hiddenWord;
+    }
+
+    public String getGuessLetter() {
+        return guessLetter;
     }
 
     // methods
@@ -29,7 +42,7 @@ public class Display {
         String letter = scannerObj.nextLine();
 
         // validate user's input
-        Pattern pattern = Pattern.compile("[^abc]");
+        Pattern pattern = Pattern.compile("[^a-z]");
         Matcher matcher = pattern.matcher(letter);
         boolean matchFound = matcher.find();
 
@@ -37,7 +50,13 @@ public class Display {
             System.out.println("Please guess a letter only");
         }
 
-        System.out.println("Your guess is: " + letter);
+        this.setGuessLetter(letter);
+    }
+
+    public void replaceUnderscore(String rightLetter, int index) {
+        StringBuilder newHiddenWord = new StringBuilder(this.getHiddenWord());
+        newHiddenWord.setCharAt(index, rightLetter.charAt(0));
+        this.setHiddenWord(newHiddenWord.toString());
     }
 
 }
