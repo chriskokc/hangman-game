@@ -1,9 +1,12 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameLogic {
     // variables
     private int userLife;
     private ArrayList<String> words = new ArrayList<>();
+    private String hiddenWords = "";
     private String pickedWord;
 
     // constructors
@@ -32,12 +35,28 @@ public class GameLogic {
 
     // methods
     public void pickRandomWord() {
-        int index = (int) (Math.random() * this.words.size());
-        this.pickedWord = words.get(index);
+        Random randomObj = new Random();
+        int randomIndex = randomObj.nextInt(this.words.size());
+        this.pickedWord = words.get(randomIndex);
+    }
+
+    public void getUnderScores() {
+        for (int i=0; i < this.pickedWord.length(); i++) {
+            this.hiddenWords += "_ ";
+        }
     }
 
     public boolean isInWord(String userInputLetter) {
         return this.pickedWord.toLowerCase().contains(userInputLetter.toLowerCase());
+    }
+
+    public static void main(String[] args) {
+        GameLogic hangman = new GameLogic();
+        hangman.pickRandomWord();
+        hangman.getUnderScores();
+        System.out.println(hangman.words);
+        System.out.println(hangman.pickedWord);
+        System.out.println(hangman.hiddenWords);
     }
 
 }
