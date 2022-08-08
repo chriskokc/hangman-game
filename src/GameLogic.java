@@ -6,12 +6,11 @@ public class GameLogic {
     // variables
     private int userLife;
     private ArrayList<String> words = new ArrayList<>();
-    private String hiddenWords = "";
     private String pickedWord;
 
     // constructors
     public GameLogic() {
-        this.setUserLife(0);
+        this.setUserLife(5);
         this.generateWords();
     }
 
@@ -33,6 +32,18 @@ public class GameLogic {
         this.words.add("Bee");
     }
 
+    // getters
+    public int getUserLife() {
+        return userLife;
+    }
+
+    public ArrayList<String> getWords() {
+        return words;
+    }
+
+    public String getPickedWord() {
+        return pickedWord;
+    }
     // methods
     public void pickRandomWord() {
         Random randomObj = new Random();
@@ -40,23 +51,9 @@ public class GameLogic {
         this.pickedWord = words.get(randomIndex);
     }
 
-    public void getUnderScores() {
-        for (int i=0; i < this.pickedWord.length(); i++) {
-            this.hiddenWords += "_ ";
-        }
-    }
-
     public boolean isInWord(String userInputLetter) {
         return this.pickedWord.toLowerCase().contains(userInputLetter.toLowerCase());
     }
 
-    public static void main(String[] args) {
-        GameLogic hangman = new GameLogic();
-        hangman.pickRandomWord();
-        hangman.getUnderScores();
-        System.out.println(hangman.words);
-        System.out.println(hangman.pickedWord);
-        System.out.println(hangman.hiddenWords);
-    }
 
 }
