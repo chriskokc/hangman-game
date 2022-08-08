@@ -1,5 +1,7 @@
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Display {
 
@@ -17,11 +19,25 @@ public class Display {
     }
 
     // methods
+    public void welcomeUser() {
+        System.out.println("Welcome to the hangman game!");
+        System.out.println("Please guess the following word: ");
+    }
+
     public void askUserForLetter() {
         System.out.println("Let's guess a letter: ");
         String letter = scannerObj.nextLine();
+
+        // validate user's input
+        Pattern pattern = Pattern.compile("[^abc]");
+        Matcher matcher = pattern.matcher(letter);
+        boolean matchFound = matcher.find();
+
+        if (letter.length() != 1 || matchFound) {
+            System.out.println("Please guess a letter only");
+        }
+
         System.out.println("Your guess is: " + letter);
     }
-
 
 }

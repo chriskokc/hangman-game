@@ -7,13 +7,15 @@ public class Mediator {
         Display display = new Display();
 
         hangman.pickRandomWord();
-        System.out.println(hangman.getPickedWord());
+        display.welcomeUser();
 
         for (int i=0; i < hangman.getPickedWord().length(); i++) {
             display.setHiddenWord("_ ");
         }
 
         System.out.println(display.getHiddenWord());
+
+        display.askUserForLetter();
     }
 
 }
