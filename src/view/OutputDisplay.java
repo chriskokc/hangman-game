@@ -88,4 +88,18 @@ public class OutputDisplay {
         }
     }
 
+    public static void showCurrentGuess() {
+        System.out.println(InputDisplay.getHiddenWord());
+    }
+
+    public static void announceResult(boolean isUserWin, String answer) {
+        if (isUserWin) {
+            System.out.println("Congratulations you win!");
+            System.out.println("The answer is: " + answer);
+        } else {
+            System.out.println("You run out of life unfortunately :(");
+            System.out.println("The answer is: " + answer);
+        }
+    }
+
 }

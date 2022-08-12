@@ -25,7 +25,7 @@ public class Mediator {
         while (!isGameOver) {
 
             OutputDisplay.drawHangman(OutputDisplay.getCurrentDrawing());
-            System.out.println(InputDisplay.getHiddenWord());
+            OutputDisplay.showCurrentGuess();
             InputDisplay.askUserForLetter();
 
             // if guess letter is in the word
@@ -33,13 +33,12 @@ public class Mediator {
                 int index = hangman.getPickedWord().toLowerCase().indexOf(InputDisplay.getGuessLetter().toLowerCase());
                 while (index >= 0) {
                     InputDisplay.replaceUnderscore(InputDisplay.getGuessLetter(), index);
-                    index = hangman.getPickedWord().toLowerCase().indexOf(InputDisplay.getGuessLetter().toLowerCase(), index+1);
+                    index = hangman.getPickedWord().toLowerCase().indexOf(InputDisplay.getGuessLetter().toLowerCase(), index + 1);
                 }
 
                 // if all underscores have been replaced
                 if (!InputDisplay.getHiddenWord().contains("_")) {
-                    System.out.println("Congratulations you win!");
-                    System.out.println("The answer is: " + hangman.getPickedWord());
+                    OutputDisplay.announceResult(true, hangman.getPickedWord());
                     isGameOver = true;
                 }
 
@@ -47,10 +46,10 @@ public class Mediator {
                 // draw a hangman
                 OutputDisplay.addingState(OutputDisplay.getDrawingState());
 
+                // if the whole hangman has been drawn
                 if (OutputDisplay.getDrawingState() == 13) {
                     OutputDisplay.drawHangman(OutputDisplay.getCurrentDrawing());
-                    System.out.println("You run out of life unfortunately :(");
-                    System.out.println("The answer is: " + hangman.getPickedWord());
+                    OutputDisplay.announceResult(false, hangman.getPickedWord());
                     isGameOver = true;
                 }
             }
