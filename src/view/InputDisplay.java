@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Display {
+public class InputDisplay {
 
     private static final Scanner scannerObj = new Scanner(System.in);
     private String hiddenWord = "";
@@ -58,9 +58,6 @@ public class Display {
     }
 
     // methods
-    public void welcomeUser() {
-        System.out.println("Welcome to the hangman game!");
-    }
 
     public void askUserForLetter() {
         System.out.println("Let's guess a letter: ");

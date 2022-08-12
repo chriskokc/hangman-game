@@ -3,7 +3,7 @@
   -  This project is built in Java using the concept of OOP.
   - Inspired by the MVC design pattern, the game was separated into different classes:
     - Model i.e Game logic
-    - View i.e view.Display 
+    - View i.e view.InputDisplay 
     - Controller i.e controller.Mediator
 
 
@@ -32,9 +32,9 @@
       - reset user's life
 
 
-  - view.Display
+  - view.InputDisplay
     - Variables
-      - beginning: display a number of _ based on the length of random word
+      - beginning: inputDisplay a number of _ based on the length of random word
       - user's life
     
     - Play game
@@ -52,7 +52,7 @@
     - getting user's input and sends it to Game Logic
     - Game Logic handles user's input
     - Game Logic sends interpretation to controller.Mediator
-    - controller.Mediator sens interpretation to view.Display
-    - view.Display shows interpretation to user
+    - controller.Mediator sens interpretation to view.InputDisplay
+    - view.InputDisplay shows interpretation to user
 
 
