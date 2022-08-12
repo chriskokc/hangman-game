@@ -7,25 +7,47 @@ public class Mediator {
         Display display = new Display();
 
         hangman.pickRandomWord();
-        System.out.println(hangman.getPickedWord());
+        System.out.println("The picked word is: " + hangman.getPickedWord());
         display.welcomeUser();
 
-        for (int i=0; i < hangman.getPickedWord().length(); i++) {
+        for (int i = 0; i < hangman.getPickedWord().length(); i++) {
             display.generateUnderscores();
         }
 
         System.out.println(display.getHiddenWord());
 
-        display.askUserForLetter();
+        boolean isGameOver = false;
 
-        if (hangman.isInWord(display.getGuessLetter())) {
-            System.out.println("The guess is " + display.getGuessLetter());
-            int index = hangman.getPickedWord().toLowerCase().indexOf(display.getGuessLetter().toLowerCase());
-            System.out.println("Index is " + index);
-            display.replaceUnderscore(display.getGuessLetter(), index);
+        while (!isGameOver) {
+            System.out.println("The current life is: " + hangman.getUserLife());
+            display.askUserForLetter();
+
+            // if guess letter is in the word
+            if (hangman.isInWord(display.getGuessLetter())) {
+                System.out.println("The guess is " + display.getGuessLetter());
+                int index = hangman.getPickedWord().toLowerCase().indexOf(display.getGuessLetter().toLowerCase());
+                display.replaceUnderscore(display.getGuessLetter(), index);
+
+                // if all underscores have been replaced
+                if (!display.getHiddenWord().contains("_")) {
+                    System.out.println("Congratulations you win!");
+                    isGameOver = true;
+                }
+
+            } else {
+                // decrease user's life
+                hangman.setUserLife(hangman.getUserLife()-1);
+
+                if (hangman.getUserLife() == 0) {
+                    System.out.println("You run out of life unfortunately :(");
+                    System.out.println("The answer is: " + hangman.getPickedWord());
+                    isGameOver = true;
+                }
+            }
+
+            System.out.println(display.getHiddenWord());
+
         }
 
-        System.out.println(display.getHiddenWord());
     }
-
 }
