@@ -22,25 +22,28 @@ public class Mediator {
                 " |_| |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|\n" +
                 "                    |___/                       \n");
 
-        display.drawHangman(display.getCurrentdDrawing());
-        System.out.println("Please guess the following word: ");
-        System.out.println(display.getHiddenWord());
-
-
         boolean isGameOver = false;
 
         while (!isGameOver) {
+            display.drawHangman(display.getCurrentDrawing());
+            System.out.println("Please guess the following word: ");
+            System.out.println(display.getHiddenWord());
+
             display.askUserForLetter();
 
             // if guess letter is in the word
             if (hangman.isInWord(display.getGuessLetter())) {
-                System.out.println("The guess is " + display.getGuessLetter());
                 int index = hangman.getPickedWord().toLowerCase().indexOf(display.getGuessLetter().toLowerCase());
-                display.replaceUnderscore(display.getGuessLetter(), index);
+                while (index >= 0) {
+                    display.replaceUnderscore(display.getGuessLetter(), index);
+                    index = hangman.getPickedWord().toLowerCase().indexOf(display.getGuessLetter().toLowerCase(), index+1);
+                }
+
 
                 // if all underscores have been replaced
                 if (!display.getHiddenWord().contains("_")) {
                     System.out.println("Congratulations you win!");
+                    System.out.println("The answer is: " + hangman.getPickedWord());
                     isGameOver = true;
                 }
 
@@ -55,9 +58,6 @@ public class Mediator {
                 }
             }
 
-            display.drawHangman(display.getCurrentdDrawing());
-            System.out.println("Please guess the following word: ");
-            System.out.println(display.getHiddenWord());
 
         }
 
