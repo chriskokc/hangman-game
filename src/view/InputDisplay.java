@@ -7,59 +7,33 @@ import java.util.regex.Pattern;
 public class InputDisplay {
 
     private static final Scanner scannerObj = new Scanner(System.in);
-    private String hiddenWord = "";
-    private String guessLetter;
-    private int drawingState = 2;
-    private String currentDrawing = "______________\n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            "___|___";
+    private static String hiddenWord = "";
+    private static String guessLetter;
 
     // setters
-    public void setHiddenWord(String hiddenWord) {
-        this.hiddenWord = hiddenWord;
+    public static void setHiddenWord(String newHiddenWord) {
+        hiddenWord = newHiddenWord;
     }
 
-    public void generateUnderscores() {
-        this.hiddenWord += "_";
+    public static void generateUnderscores() {
+        hiddenWord += "_";
     }
 
-    public void setGuessLetter(String guessLetter) {
-        this.guessLetter = guessLetter;
-    }
-
-    public void setCurrentDrawing(String currentDrawing) {
-        this.currentDrawing = currentDrawing;
-    }
-
-    public void setDrawingState(int drawingState) {
-        this.drawingState = drawingState;
+    public static void setGuessLetter(String guess) {
+        guessLetter = guess;
     }
 
     // getters
-    public String getHiddenWord() {
+    public static String getHiddenWord() {
         return hiddenWord;
     }
 
-    public String getGuessLetter() {
+    public static String getGuessLetter() {
         return guessLetter;
     }
 
-    public String getCurrentDrawing() {
-        return currentDrawing;
-    }
-
-    public int getDrawingState() {
-        return drawingState;
-    }
-
     // methods
-
-    public void askUserForLetter() {
+    public static void askUserForLetter() {
         System.out.println("Let's guess a letter: ");
         String letter = scannerObj.nextLine();
 
@@ -72,56 +46,14 @@ public class InputDisplay {
             System.out.println("Please guess a letter only");
         }
 
-        this.setGuessLetter(letter);
+        setGuessLetter(letter);
     }
 
-    public void replaceUnderscore(String rightLetter, int index) {
-        StringBuilder newHiddenWord = new StringBuilder(this.getHiddenWord());
+    public static void replaceUnderscore(String rightLetter, int index) {
+        StringBuilder newHiddenWord = new StringBuilder(getHiddenWord());
         newHiddenWord.setCharAt(index, rightLetter.charAt(0));
-        this.setHiddenWord(newHiddenWord.toString());
+        setHiddenWord(newHiddenWord.toString());
     }
 
-    public void drawHangman(String currentDrawing) {
-        System.out.println(currentDrawing);
-    }
-
-    public void addingState(int state) {
-
-        String[] drawing = this.getCurrentDrawing().split("\n");
-
-        switch (state) {
-            case 8:
-                drawing[1] = "   |/      |";
-                this.setCurrentDrawing(String.join("\n", drawing));
-                this.setDrawingState(state + 1);
-                break;
-            case 9:
-                drawing[2] = "   |      (_)";
-                this.setCurrentDrawing(String.join("\n", drawing));
-                this.setDrawingState(state + 1);
-                break;
-            case 10:
-                drawing[3] = "   |      \\|/";
-                this.setCurrentDrawing(String.join("\n", drawing));
-                this.setDrawingState(state + 1);
-                break;
-            case 11:
-                drawing[4] = "   |       |";
-                this.setCurrentDrawing(String.join("\n", drawing));
-                this.setDrawingState(state + 1);
-                break;
-            case 12:
-                drawing[5] = "   |      / \\";
-                this.setCurrentDrawing(String.join("\n", drawing));
-                this.setDrawingState(state + 1);
-                break;
-            default:
-                // if state < 8
-                drawing[drawing.length - state] = "   |   ";
-                this.setCurrentDrawing(String.join("\n", drawing));
-                this.setDrawingState(state + 1);
-                break;
-        }
-    }
 
 }
