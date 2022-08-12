@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,6 +9,15 @@ public class Display {
     private static final Scanner scannerObj = new Scanner(System.in);
     private String hiddenWord = "";
     private String guessLetter;
+    private int drawingState = 2;
+    private String currentdDrawing = "______________\n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            "___|___";
 
     // setters
     public void setHiddenWord(String hiddenWord) {
@@ -22,6 +32,14 @@ public class Display {
         this.guessLetter = guessLetter;
     }
 
+    public void setCurrentdDrawing(String currentdDrawing) {
+        this.currentdDrawing = currentdDrawing;
+    }
+
+    public void setDrawingState(int drawingState) {
+        this.drawingState = drawingState;
+    }
+
     // getters
     public String getHiddenWord() {
         return hiddenWord;
@@ -31,10 +49,17 @@ public class Display {
         return guessLetter;
     }
 
+    public String getCurrentdDrawing() {
+        return currentdDrawing;
+    }
+
+    public int getDrawingState() {
+        return drawingState;
+    }
+
     // methods
     public void welcomeUser() {
         System.out.println("Welcome to the hangman game!");
-        System.out.println("Please guess the following word: ");
     }
 
     public void askUserForLetter() {
@@ -57,6 +82,49 @@ public class Display {
         StringBuilder newHiddenWord = new StringBuilder(this.getHiddenWord());
         newHiddenWord.setCharAt(index, rightLetter.charAt(0));
         this.setHiddenWord(newHiddenWord.toString());
+    }
+
+    public void drawHangman(String currentDrawing) {
+        System.out.println(currentDrawing);
+    }
+
+    public void addingState(int state) {
+
+        String[] drawing = this.getCurrentdDrawing().split("\n");
+
+        switch (state) {
+            case 8:
+                drawing[1] = "   |/      |";
+                this.setCurrentdDrawing(String.join("\n", drawing));
+                this.setDrawingState(state + 1);
+                break;
+            case 9:
+                drawing[2] = "   |      (_)";
+                this.setCurrentdDrawing(String.join("\n", drawing));
+                this.setDrawingState(state + 1);
+                break;
+            case 10:
+                drawing[3] = "   |      \\|/";
+                this.setCurrentdDrawing(String.join("\n", drawing));
+                this.setDrawingState(state + 1);
+                break;
+            case 11:
+                drawing[4] = "   |       |";
+                this.setCurrentdDrawing(String.join("\n", drawing));
+                this.setDrawingState(state + 1);
+                break;
+            case 12:
+                drawing[5] = "   |      / \\";
+                this.setCurrentdDrawing(String.join("\n", drawing));
+                this.setDrawingState(state + 1);
+                break;
+            default:
+                // if state < 8
+                drawing[drawing.length - state] = "   |   ";
+                this.setCurrentdDrawing(String.join("\n", drawing));
+                this.setDrawingState(state + 1);
+                break;
+        }
     }
 
 }

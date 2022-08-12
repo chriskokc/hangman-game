@@ -4,21 +4,15 @@ import java.util.Random;
 
 public class GameLogic {
     // variables
-    private int userLife;
     private ArrayList<String> words = new ArrayList<>();
     private String pickedWord;
 
     // constructors
     public GameLogic() {
-        this.setUserLife(5);
         this.generateWords();
     }
 
     // setters
-    public void setUserLife(int userLife) {
-        this.userLife = userLife;
-    }
-
     public void generateWords() {
         this.words.add("Motivation");
         this.words.add("Java");
@@ -33,9 +27,6 @@ public class GameLogic {
     }
 
     // getters
-    public int getUserLife() {
-        return userLife;
-    }
 
     public ArrayList<String> getWords() {
         return words;

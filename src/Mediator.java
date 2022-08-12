@@ -14,12 +14,22 @@ public class Mediator {
             display.generateUnderscores();
         }
 
+        System.out.println("\n" +
+                "  _   _                                         \n" +
+                " | | | | __ _ _ __   __ _ _ __ ___   __ _ _ __  \n" +
+                " | |_| |/ _` | '_ \\ / _` | '_ ` _ \\ / _` | '_ \\ \n" +
+                " |  _  | (_| | | | | (_| | | | | | | (_| | | | |\n" +
+                " |_| |_|\\__,_|_| |_|\\__, |_| |_| |_|\\__,_|_| |_|\n" +
+                "                    |___/                       \n");
+
+        display.drawHangman(display.getCurrentdDrawing());
+        System.out.println("Please guess the following word: ");
         System.out.println(display.getHiddenWord());
+
 
         boolean isGameOver = false;
 
         while (!isGameOver) {
-            System.out.println("The current life is: " + hangman.getUserLife());
             display.askUserForLetter();
 
             // if guess letter is in the word
@@ -35,16 +45,18 @@ public class Mediator {
                 }
 
             } else {
-                // decrease user's life
-                hangman.setUserLife(hangman.getUserLife()-1);
+                // draw a hangman
+                display.addingState(display.getDrawingState());
 
-                if (hangman.getUserLife() == 0) {
+                if (display.getDrawingState() == 13) {
                     System.out.println("You run out of life unfortunately :(");
                     System.out.println("The answer is: " + hangman.getPickedWord());
                     isGameOver = true;
                 }
             }
 
+            display.drawHangman(display.getCurrentdDrawing());
+            System.out.println("Please guess the following word: ");
             System.out.println(display.getHiddenWord());
 
         }
