@@ -1,3 +1,7 @@
+package controller;
+
+import model.GameLogic;
+import view.Display;
 
 public class Mediator {
 

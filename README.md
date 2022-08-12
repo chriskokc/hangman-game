@@ -3,8 +3,8 @@
   -  This project is built in Java using the concept of OOP.
   - Inspired by the MVC design pattern, the game was separated into different classes:
     - Model i.e Game logic
-    - View i.e Display 
-    - Controller i.e Mediator
+    - View i.e view.Display 
+    - Controller i.e controller.Mediator
 
 
 ### Flowchart
@@ -32,7 +32,7 @@
       - reset user's life
 
 
-  - Display
+  - view.Display
     - Variables
       - beginning: display a number of _ based on the length of random word
       - user's life
@@ -48,11 +48,11 @@
       - Give feedback to user based on state 
 
 
-  - Mediator
+  - controller.Mediator
     - getting user's input and sends it to Game Logic
     - Game Logic handles user's input
-    - Game Logic sends interpretation to Mediator
-    - Mediator sens interpretation to Display
-    - Display shows interpretation to user
+    - Game Logic sends interpretation to controller.Mediator
+    - controller.Mediator sens interpretation to view.Display
+    - view.Display shows interpretation to user
 
 
